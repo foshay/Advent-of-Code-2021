@@ -1,18 +1,53 @@
-val = [0] * 12
-rows = 0
-g = 0
-e = 0
-with open("input.txt","r") as fp:
-    lines = fp.readlines()
-    for x in lines:
-        for i in range(len(x)-1):
-            val[i]+=int(x[i])
-        rows+=1
-valLen = len(val)
-for i in range(valLen):
-    if val[i] > 500:
-        g+=pow(2,valLen-1-i)
+
+def main():
+    with open("input.txt","r") as fp:
+        list0 = fp.read().splitlines()
+        lineLen = len(list0[0])
+        list1 = list0
+        for i in range(lineLen):
+            #print(len(list0))
+            #print(len(list1))
+            if len(list0) > 1:
+                list0= partO(list0,i)
+            if len(list1) > 1:
+                list1= partC(list1,i)
+            #print(list0[0])
+            print(len(list0))
+            print(len(list1))
+        print(list0)
+        print(int(list0[0], 2))
+        print(list1)
+        print(int(list1[0], 2))
+        o=int(list0[0], 2)
+        c=int(list1[0], 2)
+        print(o*c)
+
+def partO(listx,col):
+    listA = []
+    listB = []
+    for j in listx:
+        if j[col] == '1':
+            listA.append(j)
+        else:
+            listB.append(j)
+    if len(listA) >= len(listB):
+        return listA
     else:
-        e+=pow(2,valLen-1-i)
-print(g*e)
-        
+        return listB
+
+def partC(listx,col):
+    listA = []
+    listB = []
+    for j in listx:
+        if j[col] == '1':
+            listA.append(j)
+        else:
+            listB.append(j)
+    if len(listA) < len(listB):
+        return listA
+    else:
+        return listB
+
+
+if __name__ == "__main__":
+    main()
